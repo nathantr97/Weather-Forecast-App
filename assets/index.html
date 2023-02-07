@@ -4,9 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
     <title> 5-Day Weather Forecast </title>
 </head>
+
+<!-- Bulma styling sheet and classes: https://bulma.io/documentation/ -->
 <body>
-    
+    <header class="hero is-link">
+        <div class="hero-body">
+        <p class="title has-text-centered">5-Day Weather Forecast</p>
+    </div>
+    </header>
+
+    <main>
+        <div class="container">
+        <div class="columns">
+            <!-- use grid size for reference https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp -->
+            <div class="column is-one-fifth mt-6">
+            </div>
+            <h3 class="title is-3"> City name: </h3>
+            <input id="search-city" class="input is-info is-hover" type="text" placeholder="example: Bellingham">
+            </div>
+            <div class="button is-grouped is-centered mt-2">
+                <button class="button is-info is-normal is-focused" id="search-button"> Search now </button>
+            </div>
+        </div>
+
+        <div class="column">
+            <section class="section box">
+            <div class="title" id="city-searched"></div>
+            <div class="block" id="temp"></div>
+            <div class="block" id="wind"></div>
+            <div class="block" id="humidity"></div>
+        </section>
+
+        <section class="ml-6 box">
+            <div class="columns">
+                <div class="column forecast"></div>
+                <div class="column forecast"></div>
+                <div class="column forecast"></div>
+                <div class="column forecast"></div>
+                <div class="column forecast"></div>
+        </div>
+        </section>
+        </div>
+    </div>
+</div>
+</div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js" integrity="sha512-hcV6DX35BKgiTiWYrJgPbu3FxS6CsCjKgmrsPRpUPkXWbvPiKxvSVSdhWX0yXcPctOI2FJ4WP6N1zH+17B/sAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
