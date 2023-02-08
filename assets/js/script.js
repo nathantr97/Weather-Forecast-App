@@ -56,7 +56,7 @@ fetch(weathermapURL)
 
             const userIcon = data2.weather[0].icon;
             const userWeatherIcon= document.createElement("img");
-            userWeatherIcon.setAttribute("src", "https://openweather.org/img/w/") + userIcon + ".png");
+            userWeatherIcon.setAttribute("src", "https://openweather.org/img/w/" + userIcon + ".png");
 
             citySearch.append(userWeatherIcon);
 
@@ -76,5 +76,6 @@ fetch(weathermapURL)
             usernewHumidity.textContent=
             "Humidity: " + userHumidity;
             humiditySearch.append(usernewHumidity);
-        
-            })
+        })
+
+    });
