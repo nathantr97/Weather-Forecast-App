@@ -3,8 +3,8 @@
 var APIKey= "c6635ef8746ad380fe7694404b48b482";
 var geoURL= "http://api.openweathermap.org/data/2.5/weather?q=";
 var limit=1;
-var latitude = "";
-var longtitude ="";
+var lat ="";
+var lon ="";
 
 // variable for current date from day.dayjs
 
@@ -15,11 +15,14 @@ var todayDate= dayjs().format("MMM-DD,YYYY");
 var search_btn= $("#search-button");
 var searchCity=$("#search-city");
 
+// variables for returned results after users look up their cities
 
 var citySearch=$("city-searched");
 var tempSearch=$("#temp");
 var windSearch=$("#wind");
 var humiditySearch=$("#humidity");
+
+// function for button and also prevent browsers from overriding formats
 
 search_btn.on("click", function (event) {
     event.preventDefault();
@@ -32,17 +35,18 @@ if (cityName === "") {
 
 // https://openweathermap.org/api/geocoding-api
 
-var geoURL="http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}";
+var geoURL="http://api.openweathermap.org/geo/1.0/direct?q={cityName}&limit={limit}&appid={APIKey}";
 fetch(geoURL)
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
-        latitude =data[0].latitude;
-        longtitude=data[0].longtitude;
+        lat =data[0].lat;
+        lon=data[0].lon;
 
- // https://openweathermap.org/api/one-call-3
-var weathermapURL= "https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}";
+ // https://openweathermap.org/current (this is for current city that user searched!)
+
+var weathermapURL= "https://api.openweathermap.org/data/2.5/weather?q={cityName}&lat={lat}&lon={lon}&units=imperial&appid={APIKey}";
 fetch(weathermapURL)
         .then(function(response2) {
             return response2.json();
@@ -59,6 +63,8 @@ fetch(weathermapURL)
             userWeatherIcon.setAttribute("src", "https://openweather.org/img/w/" + userIcon + ".png");
 
             citySearch.append(userWeatherIcon);
+
+            // unicode for degree icon https://www.fileformat.info/info/unicode/char/b0/index.htm
 
             const userTemp = data2.main.temp;
             const usernewTemp=document.createElement("p");
@@ -78,4 +84,14 @@ fetch(weathermapURL)
             humiditySearch.append(usernewHumidity);
         })
 
-    });
+        // functions and grabbing info for next 5 days forecast go here
+        // https://openweathermap.org/forecast5
+
+    var forecastURL="https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=imperial&appid={APIKey}";
+    fetch(forecastURL)
+    .then(function (response3) {
+        return response3.json();
+    })
+    .then(function (data3)) {
+        
+    }
