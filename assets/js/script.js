@@ -11,8 +11,10 @@ var todayDate= dayjs().format("MMM-DD,YYYY");
 
 // variable for search buttons 
 
-var search_btn= $("search-button");
-var searchCity=$("search-city");
+var search_btn= $("#search-button");
+// var searchCity=$("#search-city");
+
+var searchCity= document.getElementById("search-city");
 
 // variables for returned results after users look up their cities
 
@@ -25,8 +27,9 @@ var humiditySearch=$("humidity");
 
 search_btn.on("click", function (event) {
     event.preventDefault();
+console.log("button clicked");
 
-var cityName= searchCity[0].value;
+var cityName= searchCity.value;
 if (cityName === "") {
     alert ("city name required! ❌");
     return;
@@ -34,7 +37,7 @@ if (cityName === "") {
 
 // https://openweathermap.org/api/geocoding-api
 
-var geoURL='https://api.openweathermap.org/geo/1.0/direct?q=$'+ cityName + "&limit=" + limit + "appid=" + APIKey;
+var geoURL="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=" + limit + "&appid=" + APIKey;
 
 fetch(geoURL)
     .then(function(response) {
@@ -46,7 +49,7 @@ fetch(geoURL)
 
  // https://openweathermap.org/current (this is for current city that user searched!)
 
-var weathermapURL= "https://api.openweathermap.org/data/2.5/weather?q=$" + cityName + "&units=imperial" + "&appid=" + APIKey;
+var weathermapURL= "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial" + "&appid=" + APIKey;
 fetch(weathermapURL)
         .then(function(response2) {
             return response2.json();
@@ -90,7 +93,7 @@ fetch(weathermapURL)
         // functions and grabbing info for next 5 days forecast go here
         // https://openweathermap.org/forecast5
 
-    var forecastURL="https://api.openweathermap.org/data/2.5/forecast?lat=" lat + "lon=" lon + "units=imperial" + "&appid=" APIKey;
+    var forecastURL="https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial" + "&appid=" + APIKey;
     fetch(forecastURL)
     .then(function (response3) {
         return response3.json();
@@ -140,18 +143,18 @@ fetch(weathermapURL)
             var forecastTemp = document.createElement("p");
             forecastTemp.textContent =
                 "Temperature: " + temp5Day + "\u00B0";
-            forecastDays[i].append(forecastTemp);
+            fivedaysForecast[i].append(forecastTemp);
 
             var wind5Day = data3.list[0].wind.speed;
             var forecastWind = document.createElement("p");
             forecastWind.textContent = "Wind: " + wind5Day + " MPH";
-            forecastDays[i].append(forecastWind);
+            fivedaysForecast[i].append(forecastWind);
 
             var humidity5Day = data3.list[0].main.humidity;
             var forecastHumidity = document.createElement("p");
             forecastHumidity.textContent =
                 "Humidity: " + humidity5Day;
-            forecastDays[i].append(forecastHumidity);
+            fivedaysForecast[i].append(forecastHumidity);
         }
     });
 });
