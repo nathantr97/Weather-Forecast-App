@@ -1,7 +1,6 @@
 // API Key Here
 
-var APIKey= "c6635ef8746ad380fe7694404b48b482";
-var geoURL= "http://api.openweathermap.org/data/2.5/weather?q=";
+var APIKey= "04f65e876b94b78ce8029f96bfab27bd";
 var limit=1;
 var lat ="";
 var lon ="";
@@ -35,18 +34,19 @@ if (cityName === "") {
 
 // https://openweathermap.org/api/geocoding-api
 
-var geoURL="http://api.openweathermap.org/geo/1.0/direct?q={cityName}&limit={limit}&appid={APIKey}";
+var geoURL='https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${APIKey}';
+
 fetch(geoURL)
     .then(function(response) {
         return response.json();
     })
-    .then(function(data) {
-        lat =data[0].lat;
-        lon=data[0].lon;
+    .then(function(data1) {
+        lat =data1[0].lat;
+        lon=data1[0].lon;
 
  // https://openweathermap.org/current (this is for current city that user searched!)
 
-var weathermapURL= "https://api.openweathermap.org/data/2.5/weather?q={cityName}&lat={lat}&lon={lon}&units=imperial&appid={APIKey}";
+var weathermapURL= "https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${APIKey}";
 fetch(weathermapURL)
         .then(function(response2) {
             return response2.json();
@@ -66,23 +66,26 @@ fetch(weathermapURL)
 
             // unicode for degree icon https://www.fileformat.info/info/unicode/char/b0/index.htm
 
+            // temperature
             const userTemp = data2.main.temp;
             const usernewTemp=document.createElement("p");
             usernewTemp.textContent=
             "Temperature: " + userTemp + "\u00B0";
             tempSearch.append(usernewTemp);
 
+            // wind
             const userWind=data2.wind.speed;
             const usernewWind= document.createElement("p");
             usernewWind.textContent="Wind:" + userWind + " MPH";
             windSearch.append(usernewWind);
 
+            // humidity
             const userHumidity=data2.main.humidity+ "%";
             const usernewHumidity=document.createElement("p");
             usernewHumidity.textContent=
             "Humidity: " + userHumidity;
             humiditySearch.append(usernewHumidity);
-        })
+        });
 
         // functions and grabbing info for next 5 days forecast go here
         // https://openweathermap.org/forecast5
@@ -92,6 +95,54 @@ fetch(weathermapURL)
     .then(function (response3) {
         return response3.json();
     })
-    .then(function (data3)) {
+    .then(function (data3) {
         
-    }
+        // pulling the class forecast info for 5 days at footer
+
+        var fivedaysForecast = document.querySelectorAll(".forecast");
+        var dayArray = [0, 8, 16, 24, 32].map((i) => data3.list[i]);
+
+        //for loop to replace and display the data of 5 day forecast
+        // still need to get tested to see if application displays 5 days info correctly
+        
+        for (let i = 0; i < dayArray.length; i++) {
+            fivedaysForecast[i].textContent = "";
+
+            var newcastDate = new Date();
+            newcastDate.setDate(newcastDate.getDate() + (i + 1));
+            newcastDate = newcastDate.toLocaleDateString("en-US");
+
+            var fivedates = document.createElement("h2");
+            fivedates.textContent = newcastDate;
+            fivedaysForecast[i].append(fivedates);
+
+            var forecast5DayIcon = data3.list[0].weather[0].icon;
+            var forecastIcon = document.createElement("img");
+            forecastIcon.setAttribute(
+                "src",
+                "https://openweathermap.org/img/w/" +
+                    forecast5DayIcon + ".png"
+            );
+            fivedaysForecast[i].append(forecastIcon);
+
+            var temp5Day = data3.list[0].main.temp;
+            var forecastTemp = document.createElement("p");
+            forecastTemp.textContent =
+                "Temperature: " + temp5Day + "\u00B0";
+            forecastDays[i].append(forecastTemp);
+
+            var wind5Day = data3.list[0].wind.speed;
+            var forecastWind = document.createElement("p");
+            forecastWind.textContent = "Wind: " + wind5Day + " MPH";
+            forecastDays[i].append(forecastWind);
+
+            var humidity5Day = data3.list[0].main.humidity;
+            var forecastHumidity = document.createElement("p");
+            forecastHumidity.textContent =
+                "Humidity: " + humidity5Day;
+            forecastDays[i].append(forecastHumidity);
+        }
+    });
+});
+
+});

@@ -14,15 +14,15 @@
 <body>
     <header class="hero has-background-info">
         <div class="hero-body">
-        <p class="title has-text-centered">5-Day Weather Forecast ☀️ </p>
-    </div>
+            <p class="title has-text-centered">5-Day Weather Forecast ☀️ </p>
+        </div>
     </header>
 
-    <main>
-        <div class="container">
+<main>
+    <div class="container">
         <div class="columns">
-            <!-- use grid size for reference https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp -->
-            <div class="column is-one-fifth mt-6">
+        <!-- use grid size for reference https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp -->
+        <div class="column is-one-fifth mt-6">
             <div>
             <h3 class="title is-3"> City name: </h3>
             <input id="search-city" class="input is-info is-hover" type="text" placeholder="example: Bellingham">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="column">
-            <section class="section box">
+        <section class="section box">
             <div class="title" id="city-searched"></div>
             <div class="block" id="temp"></div>
             <div class="block" id="wind"></div>
@@ -47,18 +47,21 @@
                 <div class="column forecast"></div>
                 <div class="column forecast"></div>
                 <div class="column forecast"></div>
-        </div>
+            </div>
         </section>
         </div>
     </div>
 </div>
 </div>
-    </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</main>
+
+<!-- link jquery cdn and script before body tag -->
+<!-- use module 5-6 for reference on jquery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
         integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="/assets/js/script.js"></script>
 </body>
+
 </html>
