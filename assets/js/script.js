@@ -41,7 +41,7 @@ fetch(geoURL)
         return response.json();
     })
     .then(function(data1) {
-        lat =data1[0].lat;
+        lat=data1[0].lat;
         lon=data1[0].lon;
 
  // https://openweathermap.org/current (this is for current city that user searched!)
@@ -96,6 +96,17 @@ fetch(weathermapURL)
         return response3.json();
     })
     .then(function (data3) {
+
+
+
+
+
+
+
+
+
+
+        
         
         // pulling the class forecast info for 5 days at footer
 
@@ -104,7 +115,7 @@ fetch(weathermapURL)
 
         //for loop to replace and display the data of 5 day forecast
         // still need to get tested to see if application displays 5 days info correctly
-        
+
         for (let i = 0; i < dayArray.length; i++) {
             fivedaysForecast[i].textContent = "";
 
