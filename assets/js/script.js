@@ -11,15 +11,15 @@ var todayDate= dayjs().format("MMM-DD,YYYY");
 
 // variable for search buttons 
 
-var search_btn= $("#search-button");
-var searchCity=$("#search-city");
+var search_btn= $("search-button");
+var searchCity=$("search-city");
 
 // variables for returned results after users look up their cities
 
 var citySearch=$("city-searched");
-var tempSearch=$("#temp");
-var windSearch=$("#wind");
-var humiditySearch=$("#humidity");
+var tempSearch=$("temp");
+var windSearch=$("wind");
+var humiditySearch=$("humidity");
 
 // function for button and also prevent browsers from overriding formats
 
@@ -34,7 +34,7 @@ if (cityName === "") {
 
 // https://openweathermap.org/api/geocoding-api
 
-var geoURL='https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=${limit}&appid=${APIKey}';
+var geoURL='https://api.openweathermap.org/geo/1.0/direct?q=$'+ cityName + "&limit=" + limit + "appid=" + APIKey;
 
 fetch(geoURL)
     .then(function(response) {
@@ -46,7 +46,7 @@ fetch(geoURL)
 
  // https://openweathermap.org/current (this is for current city that user searched!)
 
-var weathermapURL= "https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${APIKey}";
+var weathermapURL= "https://api.openweathermap.org/data/2.5/weather?q=$" + cityName + "&units=imperial" + "&appid=" + APIKey;
 fetch(weathermapURL)
         .then(function(response2) {
             return response2.json();
@@ -90,7 +90,7 @@ fetch(weathermapURL)
         // functions and grabbing info for next 5 days forecast go here
         // https://openweathermap.org/forecast5
 
-    var forecastURL="https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&units=imperial&appid={APIKey}";
+    var forecastURL="https://api.openweathermap.org/data/2.5/forecast?lat=" lat + "lon=" lon + "units=imperial" + "&appid=" APIKey;
     fetch(forecastURL)
     .then(function (response3) {
         return response3.json();
@@ -106,7 +106,7 @@ fetch(weathermapURL)
 
 
 
-        
+
         
         // pulling the class forecast info for 5 days at footer
 
