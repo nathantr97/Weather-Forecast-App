@@ -38,14 +38,15 @@ if (cityName === "") {
 // https://openweathermap.org/api/geocoding-api
 
 var geoURL="https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=" + limit + "&appid=" + APIKey;
-
 fetch(geoURL)
     .then(function(response) {
         return response.json();
     })
     .then(function(data1) {
-        lat=data1[0].lat;
-        lon=data1[0].lon;
+        console.log(data1);
+        var lat=data1[0].lat;
+        var lon=data1[0].lon;
+        console.log(lat, lon);
 
  // https://openweathermap.org/current (this is for current city that user searched!)
 
@@ -63,7 +64,7 @@ fetch(weathermapURL)
 
             const userIcon = data2.weather[0].icon;
             const userWeatherIcon= document.createElement("img");
-            userWeatherIcon.setAttribute("src", "https://openweather.org/img/w/" + userIcon + ".png");
+            userWeatherIcon.setAttribute("src", "https://openweather.org/img/wn/" + userIcon + "@2x.png");
 
             citySearch.append(userWeatherIcon);
 
@@ -99,17 +100,6 @@ fetch(weathermapURL)
         return response3.json();
     })
     .then(function (data3) {
-
-
-
-
-
-
-
-
-
-
-
         
         // pulling the class forecast info for 5 days at footer
 
@@ -134,8 +124,8 @@ fetch(weathermapURL)
             var forecastIcon = document.createElement("img");
             forecastIcon.setAttribute(
                 "src",
-                "https://openweathermap.org/img/w/" +
-                    forecast5DayIcon + ".png"
+                "http://openweathermap.org/img/wn/" +
+                    forecast5DayIcon + "@2x.png"
             );
             fivedaysForecast[i].append(forecastIcon);
 
